@@ -18,3 +18,10 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+function waitAfterFail() {
+    if ( this.currentTest.state === 'failed' ) {
+        return cy.wait(500);
+    }
+}
+afterEach(waitAfterFail);
