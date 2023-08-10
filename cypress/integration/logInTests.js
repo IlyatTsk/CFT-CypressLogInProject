@@ -15,6 +15,14 @@ context ('Проверка авторизации', function() {
        filesPage.checkURL()
    })
 
+   it('Проверка успешного входа с помощью клавиши ENTER', ()=> {
+       const loginPage = new LoginPage();
+       const filesPage = new FilesPage();
+
+       cy.loginWithEnter('admin', 'admin')
+       filesPage.checkURL()
+   })
+
     it('Проверка сообщения неверных данных, при введении невалидного пароля', ()=> {
         const loginPage = new LoginPage()
 
@@ -75,6 +83,24 @@ context ('Проверка авторизации', function() {
 
       cy.wait('@login')
         .its('response.statusCode')
-        .should('eq', 200);
+        .should('eq', 200)
+    })
+
+    it('Проверка информационного сообщения об ошибке сервера', () => {
+      cy.intercept('POST', '/api/login', {
+        statusCode: 500,
+        body: {
+          token: 'access_token'
+        }
+      }).as('login')
+
+      cy.login('admin', 'admin')
+
+      cy.wait('@login')
+        .its('response.statusCode')
+        .should('eq', 500)
+
+      cy.get('.error-message').should('be.visible')
+      cy.contains('.error-message', 'Что-то пошло не так')
     })
 })
