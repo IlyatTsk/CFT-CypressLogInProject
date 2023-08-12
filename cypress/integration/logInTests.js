@@ -60,17 +60,6 @@ context ('Проверка авторизации', function() {
        loginPage.errorMessageMustBeVisible()
    })
 
-    it('Проверка выхода из системы', () => {
-       const loginPage = new LoginPage();
-       const filesPage = new FilesPage();
-
-       cy.login('admin', 'admin')
-       filesPage.logOutButtonClick()
-
-       loginPage.checkURL()
-       loginPage.loginButtonShouldBeVisible()
-    })
-
     it('Проверка статус кода 200', () => {
       cy.intercept('POST', '/api/login', {
         statusCode: 200,

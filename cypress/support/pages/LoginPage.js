@@ -9,23 +9,23 @@ class LoginPage {
     }
 
     logInButtonClick() {
-        this.elements.logInButton().click();
+        this.elements.logInButton().click()
     }
 
     fillLogin(value) {
-        this.elements.inputLogin().type(value);
+        this.elements.inputLogin().type(value)
     }
 
     fillPassword(value) {
-        this.elements.inputPassword().type(value);
+        this.elements.inputPassword().type(value)
     }
 
     fileImageShouldBeVisible(){
-        this.elements.fileImage().should('be.visible');
+        this.elements.fileImage().should('be.visible')
     }
 
     errorMessageMustBeVisible(){
-        this.elements.errorMessage().should('be.visible');
+        this.elements.errorMessage().should('be.visible')
     }
 
     loginButtonShouldBeVisible(){
