@@ -48,7 +48,7 @@ context ('Интеграционные тесты с файлом', function() {
         filesPage.copyTest()
     })
 
-    it.only('Проверка удаления файла', () => {
+    it('Проверка удаления файла', () => {
     const filesPage = new FilesPage();
 
         cy.wait('@resources')
@@ -59,4 +59,21 @@ context ('Интеграционные тесты с файлом', function() {
 
         filesPage.deleteTest()
     })
+
+   it.only('Проверка перемещения файла', () => {
+   const filesPage = new FilesPage();
+
+       cy.wait('@resources')
+       cy.wait('@usage')
+
+       filesPage.createNewDirectory()
+
+       filesPage.myFilesButtonClick()
+       filesPage.popovFolderDblClick()
+       filesPage.popovFileClick()
+
+       filesPage.copyTest()
+
+       filesPage.moveTest()
+   })
 })
